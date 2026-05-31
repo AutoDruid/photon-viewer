@@ -1,5 +1,5 @@
 module github.com/AutoDruid/photon-viewer
 
-go 1.26.2
+go 1.25.0
 
-require github.com/AutoDruid/photon-parser v1.0.0 // indirect
+require github.com/AutoDruid/photon-parser v1.0.0
