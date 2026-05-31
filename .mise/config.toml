@@ -1,0 +1,15 @@
+[tools]
+node = "24"
+pnpm = "10.28.2"
+
+[tasks.build]
+description = "Build the project"
+run = "pnpm build"
+
+[tasks.typecheck]
+description = "Typecheck the project"
+run = "pnpm typecheck"
+
+[tasks.build-wasm]
+description = "Build the WASM parser"
+run = 'cd src/parser && GOOS=js GOARCH=wasm go build -o ../../public/main.wasm && cp "$(go env GOROOT)/lib/wasm/wasm_exec.js" ../../public/'
