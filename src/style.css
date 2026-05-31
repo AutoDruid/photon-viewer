@@ -1,0 +1,130 @@
+@layer tailwind-base, primevue, tailwind-utilities;
+
+@layer tailwind-base {
+  @tailwind base;
+}
+
+@tailwind components;
+
+@layer tailwind-utilities {
+  @tailwind utilities;
+}
+
+:root {
+  color-scheme: dark;
+  --bg:       #0f1115;
+  --bg-2:     #151924;
+  --bg-3:     #1b2030;
+  --fg:       #e6e9ef;
+  --fg-dim:   #8891a5;
+  --accent:   #6aa9ff;
+  --border:   #262c3d;
+  --ok:       #7ee787;
+  --warn:     #ffb454;
+  --err:      #ff6a6a;
+  --font-mono: "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+html, body, #app {
+  height: 100%;
+  margin: 0;
+}
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+}
+
+/* Things that are much easier to express outside Tailwind utilities. */
+.hex-byte.highlight,
+.hex-ascii.highlight {
+  background: rgba(106, 169, 255, 0.25);
+  color: #fff;
+  outline: 1px solid rgba(106, 169, 255, 0.7);
+  border-radius: 3px;
+}
+.tree-node.highlight {
+  background: rgba(106, 169, 255, 0.15);
+  border-left-color: var(--accent) !important;
+}
+
+/* Rotate triangle chevron: expanded points down, collapsed points right. */
+.chev {
+  display: inline-block;
+  width: 12px;
+  text-align: center;
+  color: var(--fg-dim);
+  font-size: 10px;
+  margin-right: 4px;
+  transition: transform 0.12s ease;
+  user-select: none;
+  cursor: pointer;
+}
+.chev:hover { color: var(--accent); }
+.chev.expanded { transform: rotate(90deg); }
+.chev.leaf {
+  opacity: 0.35;
+  cursor: default;
+  transform: none !important;
+}
+.chev.leaf:hover { color: var(--fg-dim); }
+
+/* Kind "tags" — tiny pills next to each tree node. */
+.kind-tag {
+  display: inline-block;
+  padding: 0 6px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  background: var(--bg-3);
+  color: var(--fg-dim);
+  margin-right: 6px;
+}
+.kind-tag.session { background: #2a3d5f; color: #b3d1ff; }
+.kind-tag.cmd     { background: #3a2f5a; color: #d7c5ff; }
+.kind-tag.ack     { background: #2f5a3a; color: #c6f0d0; }
+.kind-tag.ping    { background: #5a4a2f; color: #ffe0b3; }
+.kind-tag.rel     { background: #3d2a56; color: #e0c8ff; }
+.kind-tag.param   { background: #2a4f4f; color: #b6eaea; }
+.kind-tag.raw     { background: #5a2f2f; color: #ffc6c6; }
+
+/* Filter chips — coloured when on, greyed with strike-through when off. */
+.filter-chip {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  background: var(--bg-3);
+  color: var(--fg-dim);
+  border: 1px solid transparent;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.12s, background 0.12s, color 0.12s;
+}
+.filter-chip.on.session { background: #2a3d5f; color: #b3d1ff; }
+.filter-chip.on.cmd     { background: #3a2f5a; color: #d7c5ff; }
+.filter-chip.on.ack     { background: #2f5a3a; color: #c6f0d0; }
+.filter-chip.on.ping    { background: #5a4a2f; color: #ffe0b3; }
+.filter-chip.on.rel     { background: #3d2a56; color: #e0c8ff; }
+.filter-chip.on.param   { background: #2a4f4f; color: #b6eaea; }
+.filter-chip.on.raw     { background: #5a2f2f; color: #ffc6c6; }
+.filter-chip:not(.on) {
+  opacity: 0.45;
+  background: transparent;
+  border-color: var(--border);
+  text-decoration: line-through;
+}
+.filter-chip:hover { opacity: 1; filter: brightness(1.1); }
+
+/* Dashed guide next to children so nesting is readable. */
+.tree-children {
+  margin-left: 14px;
+  border-left: 1px dashed rgba(255, 255, 255, 0.06);
+  padding-left: 4px;
+}
